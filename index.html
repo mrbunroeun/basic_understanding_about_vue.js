@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="text" id="app">
+      <h1>{{ message}}</h1>
+      <p>Lucky Number : {{ luckyNumber }}</p>
+      <p>Lucky Number is an {{ luckyNumber %2==0? "event number" : "odd number" }}</p>
+      <p>Lucky Number list: {{ luckyNumbers[0] }}</p>
+      <p>{{ employee.name}} is {{ employee.age}} year old</p>
+    </div>
+  </body>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      setup() {
+        const message = "Hello World";
+        const luckyNumber = 7;
+        const luckyNumbers = [3, 7, 9, 11];
+        const employee = {
+          name: "John",
+          age: 30,
+          salary: 50000,
+        };
+        return {
+          message,
+          luckyNumber,
+          luckyNumbers,
+          employee,
+        };
+      },
+    }).mount("#app");
+  </script>
+
+  <style>
+    .text {
+      font-size: 50px;
+      font-weight: bold;
+      font-family: sans-serif;
+    }
+  </style>
+</html>
