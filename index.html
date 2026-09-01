@@ -8,11 +8,17 @@
   </head>
   <body>
     <div class="text" id="app">
-      <h1>{{ message}}</h1>
+      <h1>{{ changeToUppercase() }}</h1>
       <p>Lucky Number : {{ luckyNumber }}</p>
-      <p>Lucky Number is an {{ luckyNumber %2==0? "event number" : "odd number" }}</p>
+      <p>
+        a Lucky Number is an {{ luckyNumber %2==0? "event number" : "odd number"
+        }}
+      </p>
       <p>Lucky Number list: {{ luckyNumbers[0] }}</p>
+
       <p>{{ employee.name}} is {{ employee.age}} year old</p>
+
+      <p>{{ getRandomLuckyNumber() }}</p>
     </div>
   </body>
 
@@ -26,14 +32,23 @@
         const luckyNumbers = [3, 7, 9, 11];
         const employee = {
           name: "John",
-          age: 30,
+          age: 30, 
           salary: 50000,
         };
+        function changeToUppercase() {
+          return message.toUpperCase();
+        }
+
+        function getRandomLuckyNumber() {
+          return Math.floor(Math.random() * 10) + 1;
+        }
+
         return {
-          message,
           luckyNumber,
           luckyNumbers,
           employee,
+          getRandomLuckyNumber,
+          changeToUppercase,
         };
       },
     }).mount("#app");
