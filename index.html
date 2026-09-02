@@ -9,16 +9,9 @@
   <body>
     <div class="text" id="app">
       <h1>{{ changeToUppercase() }}</h1>
-      <p>Lucky Number : {{ luckyNumber }}</p>
-      <p>
-        a Lucky Number is an {{ luckyNumber %2==0? "event number" : "odd number"
-        }}
-      </p>
-      <p>Lucky Number list: {{ luckyNumbers[0] }}</p>
-
       <p>{{ employee.name}} is {{ employee.age}} year old</p>
 
-      <p>{{ getRandomLuckyNumber() }}</p>
+      <p>{{luckyRandomNumber()}}</p>
     </div>
   </body>
 
@@ -28,11 +21,10 @@
     createApp({
       setup() {
         const message = "Hello World";
-        const luckyNumber = 7;
-        const luckyNumbers = [3, 7, 9, 11];
+        let luckyNumber = 7;
         const employee = {
           name: "John",
-          age: 30, 
+          age: 30,
           salary: 50000,
         };
         function changeToUppercase() {
@@ -42,13 +34,17 @@
         function getRandomLuckyNumber() {
           return Math.floor(Math.random() * 10) + 1;
         }
+        function luckyRandomNumber() {
+          luckyNumber = Math.floor(Math.random() * 10) + 1;
+          return "lucky number: " + luckyNumber;
+        }
 
         return {
           luckyNumber,
-          luckyNumbers,
           employee,
           getRandomLuckyNumber,
           changeToUppercase,
+          luckyRandomNumber,
         };
       },
     }).mount("#app");
