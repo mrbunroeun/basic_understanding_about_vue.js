@@ -10,41 +10,64 @@
     <div class="text" id="app">
       <h1>{{ changeToUppercase() }}</h1>
       <p>{{ employee.name}} is {{ employee.age}} year old</p>
+      <p>{{ employee.salary}}</p>
 
       <p>{{luckyRandomNumber()}}</p>
+      <p>{{getMessage()}}</p>
+      <p>{{testingTheRef}}</p>
+      <p>{{luckyNumber}}</p>
     </div>
   </body>
 
   <script>
-    const { createApp } = Vue;
+    const { createApp, ref } = Vue;
 
     createApp({
       setup() {
         const message = "Hello World";
-        let luckyNumber = 7;
-        const employee = {
+        let luckyNumber = ref(10);
+        const testingTheRef = ref(90);
+
+        const employee = ref({
           name: "John",
           age: 30,
           salary: 50000,
-        };
+        });
+
+        function luckyRandomNumber() {
+          return Math.floor(Math.random() * 10) + 1;
+        }
         function changeToUppercase() {
           return message.toUpperCase();
         }
 
-        function getRandomLuckyNumber() {
-          return Math.floor(Math.random() * 10) + 1;
+        // function updateLuckyNumber() {
+        //   setTimeout(() => {
+        //     luckyNumber.value = 77;
+        //     return Math.floor(Math.random() * 10) + 1;
+        //   }, 2000);
+        // }
+
+        function updateLuckyNumber() {
+          setTimeout(() => {
+            luckyNumber.value = 97;
+            employee.value.salary = 60000;
+          }, 2000);
         }
-        function luckyRandomNumber() {
-          luckyNumber = Math.floor(Math.random() * 10) + 1;
-          return "lucky number: " + luckyNumber;
+        updateLuckyNumber();
+
+        function getMessage() {
+          return message.toUpperCase();
         }
 
         return {
           luckyNumber,
           employee,
-          getRandomLuckyNumber,
+          testingTheRef,
+          getMessage,
           changeToUppercase,
           luckyRandomNumber,
+          updateLuckyNumber,
         };
       },
     }).mount("#app");
