@@ -8,38 +8,50 @@
   </head>
   <body>
     <div class="text" id="app">
-      <h1>{{ changeToUppercase() }}</h1>
+      <span v-html="getMessage()"></span>
+      <span v-html="testing()"></span>
+      <a v-bind:href="blogUrl">Visit My Blog</a>
+      <!-- <h1>{{ changeToUppercase() }}</h1>
       <p>{{ employee.name}} is {{ employee.age}} year old</p>
       <p>{{ employee.salary}}</p>
-
-      <p>{{luckyRandomNumber()}}</p>
+ 
       <p>{{getMessage()}}</p>
       <p>{{testingTheRef}}</p>
+     -->
+      <p v-once>Render once lucky number: {{luckyRandomNumber()}}</p>
       <p>{{luckyNumber}}</p>
     </div>
   </body>
 
   <script>
-    const { createApp, ref } = Vue;
+    const { createApp, ref, reactive } = Vue;
 
     createApp({
       setup() {
         const message = "Hello World";
+        const blogUrl = "https://portforlio-example.vercel.app/";
         let luckyNumber = ref(10);
-        const testingTheRef = ref(90);
+        // const testingTheRef = ref(90);
 
-        const employee = ref({
-          name: "John",
-          age: 30,
-          salary: 50000,
-        });
+        // const employee = ref({
+        //   name: "John",
+        //   age: 30,
+        //   salary: 50000,
+        // });
+        const texts = "testing";
+
+        // const employee = reactive({
+        //   name: "John",
+        //   age: 30,
+        //   salary: 50000,
+        // });
 
         function luckyRandomNumber() {
           return Math.floor(Math.random() * 10) + 1;
         }
-        function changeToUppercase() {
-          return message.toUpperCase();
-        }
+        // function changeToUppercase() {
+        //   return message.toUpperCase();
+        // }
 
         // function updateLuckyNumber() {
         //   setTimeout(() => {
@@ -57,17 +69,22 @@
         updateLuckyNumber();
 
         function getMessage() {
-          return message.toUpperCase();
+          return `<h1><u>${message}</u></h1>`;
+        }
+        function testing() {
+          return `<strong><i>${texts} </i></strong>`;
         }
 
         return {
-          luckyNumber,
-          employee,
-          testingTheRef,
           getMessage,
-          changeToUppercase,
+          testing,
+          luckyNumber,
+          blogUrl,
+          // employee,
+          // testingTheRef,
+          // changeToUppercase,
           luckyRandomNumber,
-          updateLuckyNumber,
+          // updateLuckyNumber,
         };
       },
     }).mount("#app");
